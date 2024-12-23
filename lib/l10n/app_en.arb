@@ -1,0 +1,14 @@
+{
+  "language": "Language",
+  "arabic": "Arabic",
+  "english": "English",
+  "dark": "Dark",
+  "theme": "Theme",
+  "light": "light",
+  "home": "Home",
+  "map": "Map",
+  "favorite": "favorite",
+  "profile": "Profile",
+  "route": "Route",
+  "academy": "Academy"
+}

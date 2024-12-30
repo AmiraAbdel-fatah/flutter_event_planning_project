@@ -25,6 +25,7 @@ class _ProfileTabState extends State<ProfileTab> {
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: AppColors.primaryLight,
         toolbarHeight: height * .20,
         shape: RoundedRectangleBorder(
@@ -36,15 +37,17 @@ class _ProfileTabState extends State<ProfileTab> {
             SizedBox(
               width: width * .03,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Route Academy',
-                  style: AppStyle.bold24White,
-                ),
-                Text('route@gmail.com', style: AppStyle.medium16White)
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Route Academy',
+                    style: AppStyle.bold24White,
+                  ),
+                  Text('route@gmail.com', style: AppStyle.medium16White)
+                ],
+              ),
             )
           ],
         ),
@@ -127,6 +130,34 @@ class _ProfileTabState extends State<ProfileTab> {
                 ),
               ),
             ),
+            Spacer(),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: width * .04, vertical: height * .02),
+              child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: width * .04, vertical: height * .02),
+                      backgroundColor: AppColors.redColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12))),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.logout,
+                        color: AppColors.whiteColor,
+                      ),
+                      SizedBox(
+                        width: width * .02,
+                      ),
+                      Text(
+                        AppLocalizations.of(context)!.logout,
+                        style: AppStyle.regular20White,
+                      )
+                    ],
+                  )),
+            )
           ],
         ),
       ),

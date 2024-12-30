@@ -1,3 +1,4 @@
+import 'package:event_planning/ui/tabs/home/add_event/add_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -28,44 +29,46 @@ class _HomeScreenState extends State<HomeScreen> {
           canvasColor: Theme.of(context).primaryColor,
         ),
         child: BottomAppBar(
-          padding: EdgeInsets.zero,
-          color: Theme.of(context).primaryColor,
-          shape: CircularNotchedRectangle(),
-          notchMargin: 4,
-          child: BottomNavigationBar(
-              currentIndex: selectedIndex,
-              onTap: (index) {
-                selectedIndex = index;
-                setState(() {});
-              },
-              items: [
-                buildBottomNavigationBarItems(
-                    index: 0,
-                    iconSelectedName: AssetsManager.iconHomeSelected,
-                    iconName: AssetsManager.iconHome,
-                    label: AppLocalizations.of(context)!.home),
-                buildBottomNavigationBarItems(
-                    index: 1,
-                    iconSelectedName: AssetsManager.iconMapSelected,
-                    iconName: AssetsManager.iconMap,
-                    label: AppLocalizations.of(context)!.map),
-                buildBottomNavigationBarItems(
-                    index: 2,
-                    iconSelectedName: AssetsManager.iconFavoriteSelected,
-                    iconName: AssetsManager.iconFavorite,
-                    label: AppLocalizations.of(context)!.favorite),
-                buildBottomNavigationBarItems(
-                    index: 3,
-                    iconSelectedName: AssetsManager.iconProfileSelected,
-                    iconName: AssetsManager.iconProfile,
-                    label: AppLocalizations.of(context)!.profile)
-              ]),
+            padding: EdgeInsets.zero,
+            color: Theme.of(context).primaryColor,
+            shape: CircularNotchedRectangle(),
+            notchMargin: 4,
+            child: BottomNavigationBar(
+                currentIndex: selectedIndex,
+                onTap: (index) {
+                  selectedIndex = index;
+                  setState(() {});
+                },
+                items: [
+                  buildBottomNavigationBarItems(
+                      index: 0,
+                      iconSelectedName: AssetsManager.iconHomeSelected,
+                      iconName: AssetsManager.iconHome,
+                      label: AppLocalizations.of(context)!.home),
+                  buildBottomNavigationBarItems(
+                      index: 1,
+                      iconSelectedName: AssetsManager.iconMapSelected,
+                      iconName: AssetsManager.iconMap,
+                      label: AppLocalizations.of(context)!.map),
+                  buildBottomNavigationBarItems(
+                      index: 2,
+                      iconSelectedName: AssetsManager.iconFavoriteSelected,
+                      iconName: AssetsManager.iconFavorite,
+                      label: AppLocalizations.of(context)!.favorite),
+                  buildBottomNavigationBarItems(
+                      index: 3,
+                      iconSelectedName: AssetsManager.iconProfileSelected,
+                      iconName: AssetsManager.iconProfile,
+                      label: AppLocalizations.of(context)!.profile)
+                ]),
+          ),
         ),
-      ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // navigate to event
           //add event
+          Navigator.of(context).pushNamed(AddEvent.routeName);
         },
         child: Icon(
           Icons.add,

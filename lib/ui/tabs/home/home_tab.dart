@@ -1,3 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:event_planning/firebase_utils.dart';
+import 'package:event_planning/model/event.dart';
+import 'package:event_planning/provider/event_list_provider.dart';
 import 'package:event_planning/ui/tabs/home/event_item_widget.dart';
 import 'package:event_planning/ui/tabs/home/tab_event_widget.dart';
 import 'package:event_planning/utils/app_colors.dart';
@@ -5,6 +9,11 @@ import 'package:event_planning/utils/app_style.dart';
 import 'package:event_planning/utils/assets_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+
+import '../../../provider/user_provider.dart';
+import 'add_event/edit_event.dart';
+import 'add_event/event_details.dart';
 
 class HomeTab extends StatefulWidget {
   @override
@@ -12,10 +21,15 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  int selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
+    var userProvider = Provider.of<UserProvider>(context);
+
+    var eventListProvider = Provider.of<EventListProvider>(context);
+    eventListProvider.getEventNameList(context);
+    if (eventListProvider.eventsList.isEmpty) {
+      eventListProvider.getAllEvents(userProvider.currentUser!.id);
+    }
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.height;
     List<String> eventsNameList = [
@@ -56,7 +70,7 @@ class _HomeTabState extends State<HomeTab> {
                   style: AppStyle.regular14White,
                 ),
                 Text(
-                  'Route Academy',
+                  userProvider.currentUser!.name,
                   style: AppStyle.bold24White,
                 ),
               ],
@@ -116,11 +130,11 @@ class _HomeTabState extends State<HomeTab> {
                   height: height * .02,
                 ),
                 DefaultTabController(
-                    length: eventsNameList.length,
+                    length: eventListProvider.eventsNameList.length,
                     child: TabBar(
                         onTap: (index) {
-                          selectedIndex = index;
-                          setState(() {});
+                          eventListProvider.changeSelectedIndex(
+                              index, userProvider.currentUser!.id);
                         },
                         tabAlignment: TabAlignment.start,
                         indicatorColor: AppColors.transparentColor,
@@ -128,32 +142,60 @@ class _HomeTabState extends State<HomeTab> {
                         labelPadding:
                             EdgeInsets.symmetric(horizontal: width * .01),
                         isScrollable: true,
-                        tabs: eventsNameList.map((eventName) {
+                        tabs: eventListProvider.eventsNameList.map((eventName) {
                           return TabEventWidget(
                             backgroundColor: AppColors.whiteColor,
                             textSelectedStyle: AppStyle.medium16Primary,
                             textUnSelectedStyle: AppStyle.medium16White,
                             eventName: eventName,
-                            isSelected: selectedIndex ==
-                                eventsNameList.indexOf(eventName),
+                            isSelected: eventListProvider.selectedIndex ==
+                                eventListProvider.eventsNameList
+                                    .indexOf(eventName),
                           );
                         }).toList())),
               ],
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemBuilder: (context, index) {
+            child: eventListProvider.filterList.isEmpty
+                ? Center(
+                    child: Text(
+                      'No Event Found',
+                      style: AppStyle.medium20Primary,
+                    ),
+                  )
+                : ListView.builder(
+                    itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.symmetric(horizontal: width * .02),
-                  child: EventItemWidget(),
-                );
+                        child: InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(context, EditEvent.routeName);
+                            },
+                            child: EventItemWidget(
+                              event: eventListProvider.filterList[index],
+                            )),
+                      );
               },
-              itemCount: 20,
-            ),
+                    itemCount: eventListProvider.filterList.length,
+                  ),
           )
         ],
       ),
     );
   }
+
+// void getAllEvents()async{
+//   //print('in first getAllEvents');
+//   QuerySnapshot<Event> querySnapshot = await FirebaseUtils.getEventCollection().get();
+//   // List <Event>       List<QueryDocumentSnapshot<Event>>
+//   eventsList = querySnapshot.docs.map((doc){
+//     return doc.data();
+//   }).toList();
+//   //print('in end getAllEvents');
+//   setState(() {
+//
+//   });
+//
+// }
 }

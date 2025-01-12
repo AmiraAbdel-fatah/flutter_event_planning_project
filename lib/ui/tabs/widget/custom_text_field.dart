@@ -18,10 +18,12 @@ class CustomTextField extends StatelessWidget {
   bool obSecureText;
   String? Function(String?)? validator;
   TextEditingController? controller;
+  TextInputType? keyboardType;
 
   CustomTextField(
       {super.key,
       required this.hintText,
+      this.keyboardType = TextInputType.text,
       this.controller,
       this.validator,
       this.prefixIcon,
@@ -37,13 +39,14 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: keyboardType,
       validator: validator,
       controller: controller,
-      maxLines: maxLines,
+      maxLines: maxLines ?? 1,
       cursorColor: AppColors.blackColor,
       style: style ?? AppStyle.medium16Black,
       obscureText: obSecureText,
-      obscuringCharacter: '#',
+      obscuringCharacter: '*',
       decoration: InputDecoration(
         hintText: hintText,
         labelText: labelText,

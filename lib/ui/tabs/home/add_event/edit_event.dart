@@ -17,14 +17,14 @@ import 'package:provider/provider.dart';
 
 import '../../../../provider/user_provider.dart';
 
-class AddEvent extends StatefulWidget {
-  static const String routeName = 'add_event';
+class EditEvent extends StatefulWidget {
+  static const String routeName = 'edit_event';
 
   @override
-  State<AddEvent> createState() => _AddEventState();
+  State<EditEvent> createState() => _EditEventState();
 }
 
-class _AddEventState extends State<AddEvent> {
+class _EditEventState extends State<EditEvent> {
   // int selectedIndex = 0;
   var formKey = GlobalKey<FormState>();
   DateTime? selectDate; // save date
@@ -47,17 +47,6 @@ class _AddEventState extends State<AddEvent> {
     eventListProvider.getEventNameList(context);
     eventListProvider.eventsNameList.removeAt(0);
 
-    // List<String> eventsNameList = [
-    //   AppLocalizations.of(context)!.birthday,
-    //   AppLocalizations.of(context)!.book_club,
-    //   AppLocalizations.of(context)!.sport,
-    //   AppLocalizations.of(context)!.exhibition,
-    //   AppLocalizations.of(context)!.gaming,
-    //   AppLocalizations.of(context)!.eating,
-    //   AppLocalizations.of(context)!.work_shop,
-    //   AppLocalizations.of(context)!.holiday,
-    //   AppLocalizations.of(context)!.meeting,
-    // ];
     List<String> imageSelectedNameList = [
       AssetsManager.birthday,
       AssetsManager.book_club,
@@ -74,23 +63,12 @@ class _AddEventState extends State<AddEvent> {
     selectedEvent =
         eventListProvider.eventsNameList[eventListProvider.selectedIndex];
 
-    // Map<String,String> mapEventNameList = {
-    //   AppLocalizations.of(context)!.birthday : AssetsManager.birthday,
-    //   AppLocalizations.of(context)!.book_club : AssetsManager.book_club,
-    //   AppLocalizations.of(context)!.sport : AssetsManager.sports,
-    //   AppLocalizations.of(context)!.exhibition : AssetsManager.exhibition,
-    //   AppLocalizations.of(context)!.gaming : AssetsManager.gaming,
-    //   AppLocalizations.of(context)!.eating : AssetsManager.eating,
-    //   AppLocalizations.of(context)!.work_shop : AssetsManager.work_shop,
-    //   AppLocalizations.of(context)!.holiday : AssetsManager.holiday,
-    //   AppLocalizations.of(context)!.meeting : AssetsManager.meeting,
-    // };
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.whiteColor,
         iconTheme: IconThemeData(color: AppColors.primaryLight),
         title: Text(
-          AppLocalizations.of(context)!.create_event,
+          AppLocalizations.of(context)!.edit_event,
           style: AppStyle.medium20Primary,
         ),
         centerTitle: true,
@@ -259,20 +237,13 @@ class _AddEventState extends State<AddEvent> {
                       height: height * .02,
                     ),
                     CustomElevatedButton(
-                      text: AppLocalizations.of(context)!.add_event,
-                      onButtonClicked: addEvent,
-                    ),
+                        text: AppLocalizations.of(context)!.update_event,
+                        onButtonClicked: () {
+                          EditEvent();
+                        }),
                   ],
                 ),
               ),
-
-              // Container(
-              //   clipBehavior: Clip.antiAlias,
-              //   decoration: BoxDecoration(
-              //     borderRadius: BorderRadius.circular(20)
-              //   ),
-              //   child: Image.asset(AssetsManager.sports),
-              // ),
             ],
           ),
         ),
@@ -280,7 +251,7 @@ class _AddEventState extends State<AddEvent> {
     );
   }
 
-  void addEvent() {
+  void EditEvent() {
     if (formKey.currentState!.validate() == true) {
       /// add event
       Event event = Event(
@@ -301,7 +272,7 @@ class _AddEventState extends State<AddEvent> {
         // print('event added successfully');
       }).timeout(Duration(milliseconds: 500), onTimeout: () {
         // todo: alert dialog, snack bar , toast
-        ToastMessage.toastMsg('Event added successfully');
+        ToastMessage.toastMsg('Event Updated successfully');
         eventListProvider.getAllEvents(userProvider.currentUser!.id);
         Navigator.pop(context);
         // print('event added successfully');

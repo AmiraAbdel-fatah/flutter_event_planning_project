@@ -23,4 +23,13 @@ class AssetsManager {
   static const String sports = 'assets/images/Sports.png';
   static const String work_shop = 'assets/images/Work Shop.png';
   static const String show_password = 'assets/images/eye-slash.png';
+  static const String intro_img1 = 'assets/images/on_boarding_first_screen.png';
+  static const String intro_img2 =
+      'assets/images/on_boarding_second_screen.png';
+  static const String intro_img3 = 'assets/images/on_boarding_third_screen.png';
+  static const String intro_img4 = 'assets/images/on_boarding_forth_screen.png';
+  static const String icon_egypt = 'assets/images/EG.png';
+  static const String icon_english = 'assets/images/LR.png';
+  static const String icon_moon = 'assets/images/Moon.png';
+  static const String icon_sun = 'assets/images/Sun.png';
 }

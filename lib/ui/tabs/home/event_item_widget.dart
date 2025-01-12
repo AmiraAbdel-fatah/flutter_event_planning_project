@@ -1,39 +1,29 @@
+import 'package:event_planning/model/event.dart';
+import 'package:event_planning/provider/event_list_provider.dart';
 import 'package:event_planning/utils/app_colors.dart';
 import 'package:event_planning/utils/app_style.dart';
 import 'package:event_planning/utils/assets_manager.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import '../../../provider/user_provider.dart';
 
 class EventItemWidget extends StatelessWidget {
-  int selectedIndex = 0;
+  // int selectedIndex = 0;
+  Event event;
+
+  EventItemWidget({required this.event});
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.height;
-    List<String> eventsNameList = [
-      AppLocalizations.of(context)!.all,
-      AppLocalizations.of(context)!.birthday,
-      AppLocalizations.of(context)!.book_club,
-      AppLocalizations.of(context)!.sport,
-      AppLocalizations.of(context)!.exhibition,
-      AppLocalizations.of(context)!.gaming,
-      AppLocalizations.of(context)!.eating,
-      AppLocalizations.of(context)!.work_shop,
-      AppLocalizations.of(context)!.holiday,
-      AppLocalizations.of(context)!.meeting,
-    ];
-    List<String> imageSelectedNameList = [
-      AssetsManager.birthday,
-      AssetsManager.book_club,
-      AssetsManager.sports,
-      AssetsManager.exhibition,
-      AssetsManager.gaming,
-      AssetsManager.eating,
-      AssetsManager.work_shop,
-      AssetsManager.holiday,
-      AssetsManager.meeting,
-    ];
+    var eventListProvider = Provider.of<EventListProvider>(context);
+    var userProvider = Provider.of<UserProvider>(context);
+
     return Container(
       height: height * .31,
       margin: EdgeInsets.symmetric(
@@ -46,8 +36,7 @@ class EventItemWidget extends StatelessWidget {
             width: 2,
           ),
           image: DecorationImage(
-              image: AssetImage(imageSelectedNameList[selectedIndex]),
-              fit: BoxFit.fill)),
+              image: AssetImage(event.image!), fit: BoxFit.fill)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -63,11 +52,12 @@ class EventItemWidget extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  '22',
+                  event.dateTime!.day.toString(),
                   style: AppStyle.bold20Primary,
                 ),
                 Text(
-                  'Dec',
+                  DateFormat('MMM').format(event.dateTime!),
+                  //'${event.dateTime!.month}',
                   style: AppStyle.bold20Primary,
                 )
               ],
@@ -86,12 +76,21 @@ class EventItemWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'This is a Birthday Party ',
+                  event.title!,
                   style: AppStyle.bold14Black,
                 ),
-                Image.asset(
-                  AssetsManager.iconFavorite,
-                  color: AppColors.primaryLight,
+                InkWell(
+                  onTap: () {
+                    // update favorite
+                    eventListProvider.updateIsFavoriteEvents(
+                        event, userProvider.currentUser!.id);
+                  },
+                  child: Image.asset(
+                    event.isFavorite == true
+                        ? AssetsManager.iconFavoriteSelected
+                        : AssetsManager.iconFavorite,
+                    color: AppColors.primaryLight,
+                  ),
                 )
               ],
             ),

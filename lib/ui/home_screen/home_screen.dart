@@ -1,6 +1,8 @@
+import 'package:event_planning/provider/user_provider.dart';
 import 'package:event_planning/ui/tabs/home/add_event/add_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/app_colors.dart';
 import '../../utils/assets_manager.dart';

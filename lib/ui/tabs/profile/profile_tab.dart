@@ -1,9 +1,12 @@
+import 'package:event_planning/provider/event_list_provider.dart';
+import 'package:event_planning/ui/auth/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../provider/app_language_provider.dart';
 import '../../../provider/app_theme_provider.dart';
+import '../../../provider/user_provider.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_style.dart';
 import '../../home_screen/language_bottom_sheet.dart';
@@ -23,6 +26,9 @@ class _ProfileTabState extends State<ProfileTab> {
     var width = MediaQuery.of(context).size.width;
     var languageProvider = Provider.of<AppLanguageProvider>(context);
     var themeProvider = Provider.of<AppThemeProvider>(context);
+    var userProvider = Provider.of<UserProvider>(context);
+    var eventListProvider = Provider.of<EventListProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -135,7 +141,13 @@ class _ProfileTabState extends State<ProfileTab> {
               padding: EdgeInsets.symmetric(
                   horizontal: width * .04, vertical: height * .02),
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // todo: event list is empty
+                    eventListProvider.filterList = [];
+                    userProvider.currentUser = null;
+                    Navigator.of(context)
+                        .pushReplacementNamed(LoginScreen.routeName);
+                  },
                   style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(
                           horizontal: width * .04, vertical: height * .02),
@@ -173,4 +185,36 @@ class _ProfileTabState extends State<ProfileTab> {
     showModalBottomSheet(
         context: context, builder: (context) => ThemeBottomSheet());
   }
+//
+// // save last sura
+// saveLastTheme(
+//     {required String suraEnName,
+//       required String suraArName,
+//       required String numOfVerses}) async {
+//   final SharedPreferences prefs = await SharedPreferences.getInstance();
+//   await prefs.setString('suraEnName', suraEnName);
+//   await prefs.setString('suraArN ame', suraArName);
+//   await prefs.setString('numOfVerses', numOfVerses);
+//   await loadLastSura();
+// }
+//
+// getLastTheme() async {
+//   final SharedPreferences prefs = await SharedPreferences.getInstance();
+//   String suraEnName = prefs.getString('suraEnName') ?? '';
+//   String suraArName = prefs.getString('suraArName') ?? '';
+//   String numOfVerses = prefs.getString('numOfVerses') ?? '';
+//
+//   /// Map
+//   return {
+//     'suraEnName': suraEnName,
+//     'suraArName': suraArName,
+//     'numOfVerses': numOfVerses
+//   };
+// }
+//
+// // get data from shared preference
+// loadLastSura() async {
+//   loadSuraList = await getLastSura();
+//   setState(() {});
+// }
 }

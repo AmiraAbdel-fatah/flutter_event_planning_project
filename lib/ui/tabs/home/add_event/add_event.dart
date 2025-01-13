@@ -87,7 +87,7 @@ class _AddEventState extends State<AddEvent> {
     // };
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.whiteColor,
+        // backgroundColor: AppColors.whiteColor,
         iconTheme: IconThemeData(color: AppColors.primaryLight),
         title: Text(
           AppLocalizations.of(context)!.create_event,
@@ -149,13 +149,14 @@ class _AddEventState extends State<AddEvent> {
                   children: [
                     Text(
                       AppLocalizations.of(context)!.title,
-                      style: AppStyle.medium16Black,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     SizedBox(
                       height: height * .02,
                     ),
                     CustomTextField(
                       controller: titleController,
+                      style: Theme.of(context).textTheme.bodyMedium,
                       validator: (text) {
                         if (text!.isEmpty) {
                           return AppLocalizations.of(context)!
@@ -163,22 +164,24 @@ class _AddEventState extends State<AddEvent> {
                         }
                         return null; // valid
                       },
-                      prefixIcon: Image.asset(AssetsManager.iconEdit),
+                      prefixIcon: Image.asset(AssetsManager.iconEdit,
+                          color: Theme.of(context).iconTheme.color),
                       hintText: AppLocalizations.of(context)!.event_title,
-                      hintStyle: AppStyle.medium16Grey,
+                      hintStyle: Theme.of(context).textTheme.bodyMedium,
                     ),
                     SizedBox(
                       height: height * .02,
                     ),
                     Text(
                       AppLocalizations.of(context)!.description,
-                      style: AppStyle.medium16Black,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     SizedBox(
                       height: height * .02,
                     ),
                     CustomTextField(
                       controller: descriptionController,
+                      style: Theme.of(context).textTheme.bodyMedium,
                       validator: (text) {
                         if (text == null || text.isEmpty) {
                           return AppLocalizations.of(context)!
@@ -188,13 +191,13 @@ class _AddEventState extends State<AddEvent> {
                       },
                       maxLines: 5,
                       hintText: AppLocalizations.of(context)!.event_description,
-                      hintStyle: AppStyle.medium16Grey,
+                      hintStyle: Theme.of(context).textTheme.bodyMedium,
                     ),
                     SizedBox(
                       height: height * .02,
                     ),
                     ChooseDateOrTime(
-                      iconColor: AppColors.blackColor,
+                      iconColor: Theme.of(context).iconTheme.color,
                       iconName: Icons.calendar_month_outlined,
                       chooseDataOrTime: selectDate == null
                           ? AppLocalizations.of(context)!.choose_date
@@ -217,7 +220,7 @@ class _AddEventState extends State<AddEvent> {
                             AppLocalizations.of(context)!.event_time,
                         onChooseDataOrTimeClicked: chooseTime,
                         iconName: Icons.access_time,
-                        iconColor: AppColors.blackColor),
+                        iconColor: Theme.of(context).iconTheme.color),
                     Container(
                       padding: EdgeInsets.symmetric(
                           horizontal: width * .02, vertical: height * .01),

@@ -1,3 +1,4 @@
+import 'package:event_planning/utils/app_style.dart';
 import 'package:flutter/material.dart';
 
 class DialogUtils {
@@ -10,10 +11,12 @@ class DialogUtils {
           return AlertDialog(
             content: Row(
               children: [
-                const CircularProgressIndicator(),
+                CircularProgressIndicator(
+                  color: Theme.of(context).primaryColor,
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8),
-                  child: Text(message),
+                  child: Text(message, style: AppStyle.medium16Black),
                 )
               ],
             ),
@@ -43,7 +46,10 @@ class DialogUtils {
             // }
             posAction?.call();
           },
-          child: Text(posActionName)));
+          child: Text(
+            posActionName,
+            style: AppStyle.medium16Black,
+          )));
     }
     if (negActionName != null) {
       actions.add(TextButton(
@@ -51,13 +57,13 @@ class DialogUtils {
             Navigator.pop(context);
             negAction?.call();
           },
-          child: Text(negActionName)));
+          child: Text(negActionName, style: AppStyle.medium16Black)));
     }
     showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            content: Text(message),
+            content: Text(message, style: AppStyle.medium16Black),
             title: Text(
               title ?? '',
               style: Theme.of(context).textTheme.titleMedium,

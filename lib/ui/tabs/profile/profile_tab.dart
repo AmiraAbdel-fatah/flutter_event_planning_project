@@ -13,13 +13,14 @@ import '../../home_screen/language_bottom_sheet.dart';
 import '../../home_screen/theme_bottom_sheet.dart';
 
 class ProfileTab extends StatefulWidget {
-  const ProfileTab({super.key});
 
   @override
   State<ProfileTab> createState() => _ProfileTabState();
 }
 
 class _ProfileTabState extends State<ProfileTab> {
+  var name = 'Amira';
+  var email = 'amira@gmail.com';
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -48,10 +49,10 @@ class _ProfileTabState extends State<ProfileTab> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Route Academy',
+                    name,
                     style: AppStyle.bold24White,
                   ),
-                  Text('route@gmail.com', style: AppStyle.medium16White)
+                  Text(email, style: AppStyle.medium16White)
                 ],
               ),
             )
@@ -65,7 +66,7 @@ class _ProfileTabState extends State<ProfileTab> {
           children: [
             Text(
               AppLocalizations.of(context)!.language,
-              style: AppStyle.bold20Black,
+              style: Theme.of(context).textTheme.labelLarge,
             ),
             SizedBox(
               height: height * .02,
@@ -103,7 +104,7 @@ class _ProfileTabState extends State<ProfileTab> {
             ),
             Text(
               AppLocalizations.of(context)!.theme,
-              style: AppStyle.bold20Black,
+              style: Theme.of(context).textTheme.labelLarge,
             ),
             SizedBox(
               height: height * .02,

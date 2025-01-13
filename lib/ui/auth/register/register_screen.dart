@@ -31,7 +31,7 @@ class RegisterScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           AppLocalizations.of(context)!.register,
-          style: AppStyle.medium16Black,
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
         centerTitle: true,
       ),
@@ -55,6 +55,7 @@ class RegisterScreen extends StatelessWidget {
                 ),
                 CustomTextField(
                   controller: nameController,
+                  style: Theme.of(context).textTheme.bodyMedium,
                   validator: (text) {
                     if (text == null || text.isEmpty) {
                       return 'Please enter name'; // invalid
@@ -72,6 +73,7 @@ class RegisterScreen extends StatelessWidget {
                 ),
                 CustomTextField(
                   controller: emailController,
+                  style: Theme.of(context).textTheme.bodyMedium,
                   validator: (text) {
                     if (text == null || text.trim().isEmpty) {
                       return 'Please enter email'; // invalid
@@ -96,6 +98,7 @@ class RegisterScreen extends StatelessWidget {
                 ),
                 CustomTextField(
                   controller: passwordController,
+                  style: Theme.of(context).textTheme.bodyMedium,
                   validator: (text) {
                     if (text == null || text.trim().isEmpty) {
                       return 'Please enter password'; // invalid
@@ -120,6 +123,7 @@ class RegisterScreen extends StatelessWidget {
                 ),
                 CustomTextField(
                   controller: rePasswordController,
+                  style: Theme.of(context).textTheme.bodyMedium,
                   validator: (text) {
                     if (text == null || text.trim().isEmpty) {
                       return 'Please enter re-password'; // invalid
@@ -166,7 +170,8 @@ class RegisterScreen extends StatelessWidget {
                         TextSpan(
                             text: AppLocalizations.of(context)!
                                 .already_have_an_account,
-                            style: AppStyle.medium16Black),
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
                         TextSpan(
                           text: AppLocalizations.of(context)!.login,
                           style: AppStyle.bold16Primary.copyWith(

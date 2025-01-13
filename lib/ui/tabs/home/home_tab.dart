@@ -1,6 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:event_planning/firebase_utils.dart';
-import 'package:event_planning/model/event.dart';
 import 'package:event_planning/provider/event_list_provider.dart';
 import 'package:event_planning/ui/tabs/home/event_item_widget.dart';
 import 'package:event_planning/ui/tabs/home/tab_event_widget.dart';
@@ -12,7 +9,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../provider/user_provider.dart';
-import 'add_event/edit_event.dart';
 import 'add_event/event_details.dart';
 
 class HomeTab extends StatefulWidget {
@@ -58,7 +54,7 @@ class _HomeTabState extends State<HomeTab> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: AppColors.primaryLight,
+        //backgroundColor: AppColors.primaryLight,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -107,7 +103,7 @@ class _HomeTabState extends State<HomeTab> {
             padding: EdgeInsets.symmetric(horizontal: width * .04),
             height: height * .12,
             decoration: BoxDecoration(
-                color: AppColors.primaryLight,
+                color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(25),
                   bottomRight: Radius.circular(25),
@@ -170,7 +166,8 @@ class _HomeTabState extends State<HomeTab> {
                   padding: EdgeInsets.symmetric(horizontal: width * .02),
                         child: InkWell(
                             onTap: () {
-                              Navigator.pushNamed(context, EditEvent.routeName);
+                              Navigator.pushNamed(
+                                  context, EventDetails.routeName);
                             },
                             child: EventItemWidget(
                               event: eventListProvider.filterList[index],

@@ -1,16 +1,13 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
+import 'package:event_planning/provider/app_language_provider.dart';
 import 'package:event_planning/provider/app_theme_provider.dart';
 import 'package:event_planning/ui/on_boarding_screen/on_boarding_screen.dart';
-import 'package:event_planning/ui/tabs/widget/custom_elevated_button.dart';
-import 'package:event_planning/provider/app_language_provider.dart';
 import 'package:event_planning/utils/app_colors.dart';
 import 'package:event_planning/utils/app_style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:toggle_switch/toggle_switch.dart';
+
 import '../../utils/assets_manager.dart';
 
 class IntroductionScreen extends StatelessWidget {
@@ -27,11 +24,11 @@ class IntroductionScreen extends StatelessWidget {
     var languageProvider = Provider.of<AppLanguageProvider>(context);
 
     return Scaffold(
-      backgroundColor: AppColors.whiteColor,
+      //backgroundColor: AppColors.whiteColor,
       appBar: AppBar(
         title: Image.asset(AssetsManager.onBoardingLogo),
         centerTitle: true,
-        backgroundColor: AppColors.whiteColor,
+        //backgroundColor: AppColors.whiteColor,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -52,14 +49,14 @@ class IntroductionScreen extends StatelessWidget {
               ),
               Text(
                 AppLocalizations.of(context)!.title_intro,
-                style: AppStyle.bold20Primary,
+                style: Theme.of(context).textTheme.labelLarge,
               ),
               SizedBox(
                 height: height * .03,
               ),
               Text(
                 AppLocalizations.of(context)!.desc_intro,
-                style: AppStyle.medium16Black,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               SizedBox(
                 height: height * .03,

@@ -48,7 +48,7 @@ class OnBoardingScreen extends StatelessWidget {
               ),
               Text(
                 AppLocalizations.of(context)!.on_boarding_desc1,
-                style: AppStyle.medium16Black,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               // backgroundColor: AppColors.whiteColor,
             ],
@@ -88,7 +88,7 @@ class OnBoardingScreen extends StatelessWidget {
               ),
               Text(
                 AppLocalizations.of(context)!.on_boarding_desc2,
-                style: AppStyle.medium16Black,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],
           ),
@@ -123,7 +123,7 @@ class OnBoardingScreen extends StatelessWidget {
             ),
             Text(
               AppLocalizations.of(context)!.on_boarding_desc3,
-              style: AppStyle.medium16Black,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ]),
         ),

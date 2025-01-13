@@ -1,13 +1,13 @@
+import 'package:event_planning/ui/tabs/home/add_event/edit_event.dart';
 import 'package:event_planning/utils/app_colors.dart';
 import 'package:event_planning/utils/app_style.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../provider/event_list_provider.dart';
+import '../../../../utils/assets_manager.dart';
 import '../../widget/custom_text_field.dart';
-import '../event_item_widget.dart';
 
 class EventDetails extends StatelessWidget {
   static const String routeName = 'event details';
@@ -28,7 +28,9 @@ class EventDetails extends StatelessWidget {
         centerTitle: true,
         actions: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(EditEvent.routeName);
+            },
             child: Icon(
               Icons.edit,
               color: AppColors.blueColor,
@@ -51,17 +53,17 @@ class EventDetails extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // ListView.builder(
-            //   itemBuilder: (context, index) {
-            //     return EventItemWidget(event: eventListProvider.filterList[index],);
-            //   },
-            //   itemCount: eventListProvider.filterList.length,
-            // ),
+            Container(
+              clipBehavior: Clip.antiAlias,
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(20)),
+              child: Image.asset(AssetsManager.sports),
+            ),
             SizedBox(
-              width: width * .02,
+              height: height * .02,
             ),
             Text(
-              'data',
+              'We Are Going To Play Football',
               style: AppStyle.bold20Primary,
             ),
             SizedBox(

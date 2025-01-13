@@ -10,7 +10,6 @@ import 'package:event_planning/utils/dialog_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 import '../register/register_screen.dart';
@@ -68,6 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               CustomTextField(
                 controller: emailController,
+                style: Theme.of(context).textTheme.bodyMedium,
                 validator: (text) {
                   if (text == null || text.trim().isEmpty) {
                     return 'Please enter email'; // invalid
@@ -92,6 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               CustomTextField(
                 controller: passwordController,
+                style: Theme.of(context).textTheme.bodyMedium,
                 validator: (text) {
                   if (text == null || text.trim().isEmpty) {
                     return 'Please enter password'; // invalid
@@ -144,7 +145,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextSpan(
                           text: AppLocalizations.of(context)!
                               .do_not_have_an_account,
-                          style: AppStyle.medium16Black),
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
                       TextSpan(
                         text: AppLocalizations.of(context)!.create_account,
                         style: AppStyle.bold16Primary.copyWith(

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_planning/provider/app_language_provider.dart';
 import 'package:event_planning/provider/app_theme_provider.dart';
 import 'package:event_planning/provider/event_list_provider.dart';
@@ -50,7 +49,7 @@ class MyApp extends StatelessWidget {
       locale: Locale(languageProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      initialRoute: SplashScreen.routeName,
+      initialRoute: RegisterScreen.routeName,
       routes: {
         SplashScreen.routeName: (context) => SplashScreen(),
         OnBoardingScreen.routeName: (context) => OnBoardingScreen(),
